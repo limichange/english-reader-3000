@@ -1,43 +1,56 @@
+import { useState } from 'react';
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
 import './App.css';
 
-const Hello = () => {
+function Hello() {
+  const [url, setUrl] = useState('https://www.theverge.com/');
+
   return (
     <div>
-      <div className="Hello">
-        <img width="200" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
+      <div style={{ display: 'flex' }}>
+        <div
+          style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
         >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="folded hands">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
+          <input
+            onChange={(e) => setUrl(e.target.value)}
+            value={url}
+            type="text"
+          />
+          <webview
+            style={{
+              flex: 1,
+            }}
+            src={url}
+          />
+        </div>
+
+        <div>
+          <div>
+            <webview
+              src="https://www.merriam-webster.com/dictionary/edge"
+              style={{
+                width: 760,
+                height: '50vh',
+              }}
+            />
+
+            <webview
+              src="https://www.deepl.com/en/translator#en/zh/"
+              style={{
+                width: 760,
+                height: '50vh',
+              }}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default function App() {
   return (
